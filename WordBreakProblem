@@ -1,0 +1,30 @@
+
+import java.util.HashSet;
+
+
+public class WordBreakProblem {
+    public static HashSet<String>dist = new HashSet<>();
+    
+ private static boolean wordBreak(String word){
+int size = word.length();
+     System.out.println("size is :: "+size);
+     if(size==0)return true;
+for(int i=1;i<=size;i++){
+    if(dist.contains(word.substring(0, i))
+            && wordBreak(word.substring(i, size))){
+        return true;
+    }
+}
+return false;
+} 
+    public static void main(String[] args) {
+        String temp[] = {"mobile","samsung","sam","sung","man"};
+        for(String s:temp){
+            dist.add(s);
+        }
+        System.out.println(wordBreak("sam"));
+    }
+}
+
+TimeComplexity -->  
+Space Complexity -->
