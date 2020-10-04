@@ -1,0 +1,64 @@
+22. Print Anagrams Together 
+Given an array of strings, return all groups of strings that are anagrams. The groups must be created in order of their appearance in the original array. Look at the sample case for clarification.
+
+Example 1:
+
+Input:
+N = 5
+words[] = {act,god,cat,dog,tac}
+Output: 
+god dog
+act cat tac
+Explanation: There are 2 groups of
+anagrams god, dog make group 1.
+act, cat, tac make group 2. 
+Your Task:
+The task is to complete the function Anagrams() that takes a list of strings as input and returns a list of groups such that each group consists of all the strings that are anagrams.
+
+Expected Time Complexity: O(N)
+Expected Auxiliary Space: O(N)
+Company Tags
+ Amazon D-E-Shaw Goldman Sachs Morgan Stanley Snapdeal
+ 
+ Solution-----------------
+ class Solution {
+    public List<List<String>> Anagrams(String[] string_list) {
+        
+        HashMap <String, List<String>> mp = new HashMap<>();
+        List<List<String>> ans = new ArrayList <List<String>>();
+        
+        for(String i: string_list)
+        {
+            char ch[] = i.toCharArray();
+            Arrays.sort(ch);
+            // Convert the string to its lexicographically 
+            // least representation, 
+            // e.g. cat->act, act->act, tac->act 
+            String s = String.valueOf(ch);
+            
+            // Check if that representation has 
+            // occurred already
+            if(mp.containsKey(s))
+            {
+                // If occurred add the original string to the map
+                mp.get(s).add(i);
+            }
+            
+            // If not present
+            else
+            {
+                // Create a new list
+                List<String> li = new ArrayList<>();
+                // Add the original string
+                li.add(i);
+                ans.add(li);
+                // Insert into the map the string as key 
+                // and the new list as value
+                mp.put(s,li);
+            }
+        }
+        
+        return ans;
+        
+    }
+}
